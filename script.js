@@ -34,50 +34,50 @@ var highscores = {};
 var questions = [
     {
         question: "When is this hw due?",
-        answers: ["erf",
+        answers: ["Monday",
             "Tuesday",
-            "re",
-            "erre",
+            "Friday",
+            "Saturday",
         ],
         correctAnswer: "Tuesday"
     },
     {
         question: "When does class start?",
         answers: [
-            "aer",
+            "11",
             "10",
-            "cfre",
-            "d",
+            "2",
+            "8",
         ],
         correctAnswer: "10"
     },
     {
         question: "When does class end?",
         answers: [
-            "awe",
+            "2",
             "3PM",
-            "cwe",
-            "dwe",
+            "1",
+            "6",
         ],
         correctAnswer: "3PM"
     },
     {
         question: "What hw is this?",
         answers: [
-            "awere",
+            "2",
             "HW4",
-            "cwere",
-            "redwe",
+            "1",
+            "6",
         ],
         correctAnswer: "HW4"
     },
     {
         question: "How long is this class",
         answers: [
-            "awrre",
+            "forever",
             "12 weeks",
-            "cwere",
-            "derwe",
+            "2",
+            "1 hour",
         ],
         correctAnswer: "12 weeks"
     }
