@@ -20,12 +20,14 @@
 // var example = document.querySelector("#a1");
 // document.getElementById("a1");
 
-var time = 150;
+var time = 30;
 var questionIndex = 0;
 var $timer = document.querySelector("#timer");
 var $startQ = document.querySelector("#startQuiz");
 var $questionContainer = document.querySelector;
 var startcont = document.querySelector("#startCont");
+$("#endscreen").hide();
+
 
 ("#question-container");
 var questions = [
@@ -91,8 +93,13 @@ function startQuiz() {
         timer.textContent = time;
         time--;
 
-        if (time === 0) {
-            clearInterval(timerInterval)
+
+
+        if (time <= 0) {
+
+            clearInterval(timerInterval);
+            endGame();
+
         }
 
     }, 1000);
@@ -131,12 +138,13 @@ document.addEventListener("click", function (e) {
         console.log("Correct");
     } else {
         console.log("Wrong!");
-        //timer - placement
+        time = time - 10;
     }
 
     questionIndex++;
     if (questionIndex === questions.length) {
         endGame();
+
 
     } else {
 
@@ -144,45 +152,45 @@ document.addEventListener("click", function (e) {
     }
 });
 
+var highscores = {};
+
 
 
 function endGame() {
-    document.getElementById("intFrm").submit();
 
+    $("#finalscore").text(time);
+    $("#endscreen").show();
+    $("#question-containter").hide();
+
+    $("#highscores").show();
+    var scoreobj = JSON.parse(localStorage.getItem("scores"));
+
+    console.log(scoreobj);
+
+
+    for (const property in scoreobj) {
+        $("#scorelist").append("<p>" + property + ": " + scoreobj[property] + "</p>");
+
+        console.log(`${property}: ${scoreobj[property]}`);
+    }
 
 }
 
+$("#triggerHsp").on("click", function (event) {
+    event.preventDefault();
+
+    var user = $("#userintials").val();
+    highscores[user] = time;
+
+    localStorage.setItem("scores", JSON.stringify(highscores));
 
 
-const userOrder = {};
-
-function getValues(e) {
-    // turn form elements object into an array
-    const elements = Array.prototype.slice.call(e.target.elements);
-
-    // go over the array storing input name & value pairs
-    elements.forEach((el) => {
-        if (el.type !== "submit") {
-            userOrder[el.name] = el.value;
-        }
-    });
-
-    // finally save to localStorage
-    localStorage.setItem('userOrder', JSON.stringify(userOrder));
-}
-
-document.getElementById("myform").addEventListener("submit", getValues);
+    console.log(highscores);
 
 
+    endGame();
 
-var highscores = localStorage.getItem("highScores");
-if (highscores) {
-    highscores = JSON.parse(highscores);
-} else {
-    highscores = [];
-}
-highscores.push({
-    initials: "TB",
-    score: "3/5"
-});
-localStorage.setItem("highScores", JSON.stringify(highscores));
+
+})
+
+
