@@ -27,6 +27,7 @@ var $startQ = document.querySelector("#startQuiz");
 var $questionContainer = document.querySelector;
 var startcont = document.querySelector("#startCont");
 $("#endscreen").hide();
+var highscores = {};
 
 
 ("#question-container");
@@ -88,12 +89,22 @@ var questions = [
 
 //Update this func to trigger the questions & timer 
 function startQuiz() {
+    highscores = JSON.parse(localStorage.getItem("scores"))
+
+    // var highscores = localStorage.getItem("highScores"); if(highscores){
+    //     highscores = JSON.parse(highscores); }else { highscores = []; } // loop over
+    //     high scores // add them to the page
+
 
     var timerInterval = setInterval(function () {
         timer.textContent = time;
         time--;
 
+        if (questionIndex === questions.length) {
 
+            clearInterval(timerInterval);
+
+        }
 
         if (time <= 0) {
 
@@ -152,15 +163,17 @@ document.addEventListener("click", function (e) {
     }
 });
 
-var highscores = {};
+
 
 
 
 function endGame() {
+    // clearInterval(timerInterval);
 
     $("#finalscore").text(time);
     $("#endscreen").show();
     $("#question-containter").hide();
+    $("#timer").hide();
 
     $("#highscores").show();
     var scoreobj = JSON.parse(localStorage.getItem("scores"));
